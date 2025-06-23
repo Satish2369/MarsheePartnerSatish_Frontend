@@ -2,23 +2,42 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import {useRouter} from "next/navigation";
+import { useDispatch } from "react-redux";
+import { addUser } from "@/redux/userSlice";
+import { BASE_URL } from "@/utils/constant";
 
 const Signup = () => {
  
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+ 
 
-  const handleSubmit = (e) => {
+ const router = useRouter();
+ const dispatch = useDispatch();
+
+
+const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    try{
+         const res  = await axios.post(BASE_URL + "/signup",{name:fullName,email,password},{
+         withCredentials:true });
 
-    console.log("Signup Data:", {
-      fullName,
-      email,
-      password,
-    });
+           console.log(res.data.data);
 
-   
+           dispatch(addUser(res.data.data));
+         
+            router.push("/home");
+    }
+   catch(e){
+
+     console.error(e.message);
+   }
+  
+ 
   };
 
   return (

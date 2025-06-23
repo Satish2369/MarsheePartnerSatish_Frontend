@@ -1,7 +1,10 @@
 import "./globals.css";
 
 import { Inter } from "next/font/google";
+import store from "@/redux/store"
+import ReduxProvider from "@/components/ReduxProvider";
 
+import { Provider } from "react-redux";
 const inter = Inter({ subsets: ["latin"] });
 
 
@@ -17,7 +20,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.className}`}
       >
-        {children}
+
+          <ReduxProvider>
+             {children}
+          </ReduxProvider>
+
+
+       
       </body>
     </html>
   );

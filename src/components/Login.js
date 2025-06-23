@@ -2,16 +2,44 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+
+import { addUser } from "@/redux/userSlice";
+import { useDispatch } from "react-redux";
+import { BASE_URL } from "@/utils/constant";
 
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const router = useRouter();
+  
+   const dispatch = useDispatch();
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+  
+    try{
+         const res  =  await axios.post(BASE_URL + "/login",{email,password},{
+         withCredentials:true })
+
+       console.log(BASE_URL);
+        
+
+       dispatch(addUser(res.data.data));
+
+       router.push("/home");
+
+    
+    }
+   catch(e){
+
+     console.error(e.message);
+   }
+  
  
   };
 
