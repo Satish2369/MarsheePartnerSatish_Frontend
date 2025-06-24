@@ -1,13 +1,12 @@
 import "./globals.css";
-
-import { Inter } from "next/font/google";
-import store from "@/redux/store"
+import { Montserrat } from "next/font/google";
 import ReduxProvider from "@/components/ReduxProvider";
 
-import { Provider } from "react-redux";
-const inter = Inter({ subsets: ["latin"] });
-
-
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -17,16 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className}`}
-      >
-
-          <ReduxProvider>
-             {children}
-          </ReduxProvider>
-
-
-       
+      <body className={montserrat.className}>
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );

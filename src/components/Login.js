@@ -26,7 +26,7 @@ const Login = () => {
          const res  =  await axios.post(BASE_URL + "/login",{email,password},{
          withCredentials:true })
 
-       console.log(BASE_URL);
+      //  console.log(BASE_URL);
         
 
        dispatch(addUser(res.data.data));

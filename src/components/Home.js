@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { IoPencilOutline } from "react-icons/io5";
+import { LiaExpandSolid } from "react-icons/lia";
+import { FaBars, FaAngleLeft } from "react-icons/fa";
+
 
 const Home = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -25,11 +27,11 @@ const Home = () => {
         } bg-gray-100 p-4 rounded-lg`}
       >
         <button onClick={toggleSidebar} className="flex justify-end">
-                 <IoPencilOutline />
+              {sidebarOpen ? <FaAngleLeft size={20}/> : <LiaExpandSolid size={20} /> }  
         </button>
 
         {sidebarOpen ? (
-          <ul className=" mt-[12vw]  space-y-2 text-2xl text-center text-black font-thin">
+          <ul className=" mt-[12vw]  space-y-2 text-xl text-left text-black font-thin cursor-pointer">
             <li>Onboarding</li>
             <li>Menu</li>
             <li>Orders</li>
@@ -39,7 +41,7 @@ const Home = () => {
             <li>Settings</li>
           </ul>
         ) : (
-          <div className="flex flex-col gap-4 mt-[8vw] ">
+          <div className="flex flex-col gap-4 mt-[12vw] ">
             {new Array(7).fill().map((_, index) => (
               <div key={index} className="  w-6 h-6 rounded-full bg-gray-200"></div>
             ))}
@@ -47,32 +49,32 @@ const Home = () => {
         )}
       </div>
 
-      {/* Main + C Component wrapper */}
+     
       <div className="flex gap-6 transition-all duration-300 w-full">
-        {/* Main */}
+        
         <div
           className={`flex flex-col gap-6 ${
             sidebarOpen ? "w-full" : "w-[80%]"
           } transition-all duration-300`}
         >
-          {/* Title */}
+         
           <div className="bg-gray-100 p-6 rounded-lg h-[15vw]">
             <div className="m-[2vw]">
-              <h2 className="text-4xl font-thin">A dashboard to hear</h2>
-              <h2 className="text-4xl font-thin">what pets don&apos;t say</h2>
+              <h2 className="text-4xl font-light">A dashboard to hear</h2>
+              <h2 className="text-4xl font-light">what pets don&apos;t say</h2>
             </div>
           </div>
 
-          {/* Onboarding */}
+        
           <div className="   rounded-xl flex  justify-between  gap-2 flex-1 ">
 
               <div className="bg-gray-100  flex  justify-center items-center gap-6 flex-1  min-w-[15vw] h-[15vw]">
-                     <div className=" flex flex-col text-3xl font-thin">
+                     <div className=" flex flex-col text-xl font-thin">
                         <h2>Petcare Partner</h2>
                         <h2>Onboarding</h2>
                     </div>
 
-            {/* Circular Progress */}
+            
 
             <div  className=" ">
                    <div className="relative w-44 h-44">
@@ -117,16 +119,16 @@ const Home = () => {
           </div>
         </div>
 
-        {/* C Component - Only when sidebar is closed */}
+      
         {!sidebarOpen && (
           <div className="w-[20%] flex flex-col gap-4 transition-all duration-300">
             <div className="flex items-center gap-3 bg-gray-100 h-[3vw] rounded-lg px-4">
               <div className="w-4 h-4 rounded-full bg-green-500" />
-              <div className="text-xl font-thin">Updated 2s ago</div>
+              <div className="text-sm font-thin">Updated 2s ago</div>
             </div>
 
             <div className="bg-gray-100 flex-1 rounded-lg p-4 flex justify-between items-start">
-              <p className="text-2xl font-thin">Notifications</p>
+              <p className="text-xl font-thin">Notifications</p>
               <div className="w-4 h-4 rounded-full bg-green-500" />
             </div>
           </div>
