@@ -14,8 +14,8 @@ const Home = () => {
     setSidebarOpen((prev) => !prev);
   };
 
-  const user = useSelector((store)=>store.user);
-  const userName = user[0].name;
+  const user = useSelector((store)=>store?.user);
+  const userName = user[0]?.name;
 
  
   const progressPercent = sidebarOpen ? 20 : 80;
