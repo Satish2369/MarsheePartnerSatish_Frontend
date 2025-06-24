@@ -1,27 +1,46 @@
 "use client";
-
 import { useState } from "react";
 import { LiaExpandSolid } from "react-icons/lia";
-import { FaBars, FaAngleLeft } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GiContract } from "react-icons/gi";
+import axios from "axios";
+import { BASE_URL } from "@/utils/constant";
+import { useRouter } from "next/navigation";
+import { removeUser } from "@/redux/userSlice";
 
 
 const Home = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
-
   const user = useSelector((store)=>store?.user);
   const userName = user[0]?.name;
-
- 
   const progressPercent = sidebarOpen ? 20 : 80;
   const radius = 36;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference * (1 - progressPercent / 100);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+ const handleLogOut = ()=>{
+
+  try{
+    
+   const res = axios.post(BASE_URL+"/logout",{},{withCredentials:true});
+
+     dispatch(removeUser());
+    router.push("/login");
+   console.log("logout successfully");
+  }
+  catch(e){
+     console.error(e.message)
+  }
+   
+
+
+ }
+
 
   return (
     <div className="flex h-screen w-full bg-white text-black p-6 gap-4">
@@ -31,8 +50,8 @@ const Home = () => {
           sidebarOpen ? "w-[20vw]" : "w-[4vw]"
         } bg-gray-100 p-4 rounded-lg`}
       >
-        <button onClick={toggleSidebar} className="flex w-full justify-end">
-              {sidebarOpen ? <GiContract className="text-gray-600"  size={28} /> : <LiaExpandSolid size={20} className="text-gray-600"   /> }  
+        <button onClick={toggleSidebar} className="flex w-full justify-end ">
+              {sidebarOpen ? <GiContract className="text-gray-600 cursor-pointer"  size={28} /> : <LiaExpandSolid size={20} className="text-gray-600 cursor-pointer"   /> }  
         </button>
 
         {sidebarOpen ? (
@@ -47,6 +66,7 @@ const Home = () => {
             <li>Team</li>
             <li>Settings</li>
           </ul>
+             <span  className="inline-block cursor-pointer mt-4 text-sm bg-black py-2 px-6 rounded-md text-white" onClick={handleLogOut}>Logout</span>
              </div>
 
         ) : (
