@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { LiaExpandSolid } from "react-icons/lia";
 import { FaBars, FaAngleLeft } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { GiContract } from "react-icons/gi";
 
 
 const Home = () => {
@@ -11,6 +13,9 @@ const Home = () => {
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
+
+  const user = useSelector((store)=>store.user);
+  const userName = user[0].name;
 
  
   const progressPercent = sidebarOpen ? 20 : 80;
@@ -26,12 +31,14 @@ const Home = () => {
           sidebarOpen ? "w-[20vw]" : "w-[4vw]"
         } bg-gray-100 p-4 rounded-lg`}
       >
-        <button onClick={toggleSidebar} className="flex justify-end">
-              {sidebarOpen ? <FaAngleLeft size={20}/> : <LiaExpandSolid size={20} /> }  
+        <button onClick={toggleSidebar} className="flex w-full justify-end">
+              {sidebarOpen ? <GiContract className="text-gray-600"  size={28} /> : <LiaExpandSolid size={20} className="text-gray-600"   /> }  
         </button>
 
         {sidebarOpen ? (
-          <ul className=" mt-[12vw]  space-y-2 text-xl text-left text-black font-thin cursor-pointer">
+           <div>
+             <div className="text-[20px]  mt-[3vw]  ml-2 text-left">Hello {userName}!</div>
+          <ul className=" mt-[6vw]  space-y-2 text-sm ml-2 text-left text-black font-thin cursor-pointer">
             <li>Onboarding</li>
             <li>Menu</li>
             <li>Orders</li>
@@ -40,8 +47,10 @@ const Home = () => {
             <li>Team</li>
             <li>Settings</li>
           </ul>
+             </div>
+
         ) : (
-          <div className="flex flex-col gap-4 mt-[12vw] ">
+          <div className="flex flex-col gap-4 mt-[6vw] ">
             {new Array(7).fill().map((_, index) => (
               <div key={index} className="  w-6 h-6 rounded-full bg-gray-200"></div>
             ))}
@@ -104,7 +113,7 @@ const Home = () => {
               </div>
             </div>
 
-              <p className="text-xl text-black font-thin text-center ">
+              <p className="text-sm text-black font-thin text-center ">
               {progressPercent === 80 ? "Completed" : "Onboarding Left"}
               </p>
             </div>
