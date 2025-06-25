@@ -3,16 +3,18 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "@/utils/constant";
 
 const AdminDashboard = () => {
   const [allAccounts, setAllAccounts] = useState([]);
   const [filteredAccounts, setFilteredAccounts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [error,setError] = useState("");
 
   const fetchAccounts = async () => {
     try {
-      const res = await axios.get("/admin/accounts", {
-        withCredentials: true, 
+      const res = await axios.get(BASE_URL + "/admin/accounts", {
+        withCredentials: true,
       });
 
       if (res.data.success) {
@@ -21,6 +23,7 @@ const AdminDashboard = () => {
       }
     } catch (err) {
       console.error("Failed to fetch accounts:", err);
+      setError(err.message);
     }
   };
 
@@ -48,6 +51,7 @@ const AdminDashboard = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      {error && <p className="text-red-400 texl-[30px] text-center">{error}</p>}
 
       {filteredAccounts.length === 0 ? (
         <p>No accounts found.</p>
