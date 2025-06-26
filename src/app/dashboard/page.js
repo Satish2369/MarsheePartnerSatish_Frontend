@@ -1,5 +1,5 @@
 
-import Home from "@/components/Home"
+import Dashboard from "@/components/Dashboard"
 import ProtectedRoute from "@/components/ProtectedRoute"
 
 const page = () => {
@@ -8,7 +8,7 @@ const page = () => {
 
     <div>
       <ProtectedRoute>
-            <Home/>
+            <Dashboard/>
       </ProtectedRoute>
       
     </div>

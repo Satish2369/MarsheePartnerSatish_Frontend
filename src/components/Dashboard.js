@@ -8,8 +8,7 @@ import { BASE_URL } from "@/utils/constant";
 import { useRouter } from "next/navigation";
 import { removeUser } from "@/redux/userSlice";
 
-
-const Home = () => {
+const Dashboard = ({ isAdminView = false }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
@@ -23,24 +22,22 @@ const Home = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
- const handleLogOut = ()=>{
+  const handleLogOut = () => {
+    try {
+      // If in admin view, don't actually log out the admin
+      if (isAdminView) {
+        return;
+      }
 
-  try{
-    
-   const res = axios.post(BASE_URL+"/logout",{},{withCredentials:true});
+      const res = axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
 
-     dispatch(removeUser());
-    router.push("/login");
-   console.log("logout successfully");
-  }
-  catch(e){
-     console.error(e.message)
-  }
-   
-
-
- }
-
+      dispatch(removeUser());
+      router.push("/login");
+      console.log("logout successfully");
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
 
   return (
     <div className="flex h-screen w-full bg-white text-black p-6 gap-4">
@@ -51,34 +48,52 @@ const Home = () => {
         } bg-gray-100 p-4 rounded-lg`}
       >
         <button onClick={toggleSidebar} className="flex w-full justify-end ">
-              {sidebarOpen ? <GiContract className="text-gray-600 cursor-pointer"  size={28} /> : <LiaExpandSolid size={20} className="text-gray-600 cursor-pointer"   /> }  
+          {sidebarOpen ? (
+            <GiContract className="text-gray-600 cursor-pointer" size={28} />
+          ) : (
+            <LiaExpandSolid
+              size={20}
+              className="text-gray-600 cursor-pointer"
+            />
+          )}
         </button>
 
         {sidebarOpen ? (
-           <div>
-             <div className="text-[20px]  mt-[3vw]  ml-2 text-left">Hello {userName}!</div>
-          <ul className=" mt-[6vw]  space-y-2 text-sm ml-2 text-left text-black font-thin cursor-pointer">
-            <li>Onboarding</li>
-            <li>Menu</li>
-            <li>Orders</li>
-            <li>Inventory</li>
-            <li>Analytics</li>
-            <li>Team</li>
-            <li>Settings</li>
-          </ul>
-             <span  className="inline-block cursor-pointer mt-4 text-sm bg-black py-2 px-6 rounded-md text-white" onClick={handleLogOut}>Logout</span>
-             </div>
-
+          <div>
+            <div className="text-[20px] mt-[3vw] ml-2 text-left">
+              Hello {userName}!
+              {isAdminView && <span className="text-sm text-blue-500 block">(Admin View)</span>}
+            </div>
+            <ul className="mt-[6vw] space-y-2 text-sm ml-2 text-left text-black font-thin cursor-pointer">
+              <li>Onboarding</li>
+              <li>Menu</li>
+              <li>Orders</li>
+              <li>Inventory</li>
+              <li>Analytics</li>
+              <li>Team</li>
+              <li>Settings</li>
+            </ul>
+            {!isAdminView && (
+              <span
+                className="inline-block cursor-pointer mt-4 text-sm bg-black py-2 px-6 rounded-md text-white"
+                onClick={handleLogOut}
+              >
+                Logout
+              </span>
+            )}
+          </div>
         ) : (
           <div className="flex flex-col gap-4 mt-[6vw] ">
             {new Array(7).fill().map((_, index) => (
-              <div key={index} className="  w-6 h-6 rounded-full bg-gray-200"></div>
+              <div
+                key={index}
+                className="w-6 h-6 rounded-full bg-gray-200"
+              ></div>
             ))}
           </div>
         )}
       </div>
 
-     
       <div className="flex gap-6 transition-all duration-300 w-full">
         
         <div
@@ -94,16 +109,12 @@ const Home = () => {
             </div>
           </div>
 
-        
           <div className="   rounded-xl flex  justify-between  gap-2 flex-1 ">
-
               <div className="bg-gray-100  flex  justify-center items-center gap-6 flex-1  min-w-[15vw] h-[15vw]">
                      <div className=" flex flex-col text-xl font-thin">
                         <h2>Petcare Partner</h2>
                         <h2>Onboarding</h2>
                     </div>
-
-            
 
             <div  className=" ">
                    <div className="relative w-44 h-44">
@@ -139,16 +150,12 @@ const Home = () => {
             </div>
         
               </div>
-
               <div className="bg-zinc-100  flex-1 min-w-[15vw] h-[15vw]">
-
-
               </div>
                  
           </div>
         </div>
 
-      
         {!sidebarOpen && (
           <div className="w-[20%] flex flex-col gap-4 transition-all duration-300">
             <div className="flex items-center gap-3 bg-gray-100 h-[3vw] rounded-lg px-4">
@@ -167,4 +174,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;
