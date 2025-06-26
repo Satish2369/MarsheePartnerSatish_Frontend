@@ -44,7 +44,7 @@ const AdminDashboard = () => {
         return;
       }
   
-      router.push(`/admin-dashboard/partner/${partnerId}`);
+      router.push(`/admin/partner/${partnerId}`);
     } catch (err) {
       console.error("Failed to access partner account:", err);
       setError(err.message);
@@ -82,8 +82,8 @@ const AdminDashboard = () => {
           className="bg-white w-full ml-[18vw]  rounded-xl cursor-pointer shadow-md p-4 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
           onClick={() => handleAccount(acc._id)} 
         >
-          <h2 className="text-lg font-semibold text-gray-800"> partner name: {acc.name}</h2>
-          <p className="text-sm text-gray-600">emailId : {acc.email}</p>
+          <h2 className="text-lg font-semibold text-gray-800"> partner name: {acc?.name}</h2>
+          <p className="text-sm text-gray-600">emailId : {acc?.email}</p>
         </div>
       );
     })}

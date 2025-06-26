@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
@@ -10,7 +9,6 @@ import { addUser } from "@/redux/userSlice";
 
 const PartnerDashboardAdmin = () => {
   const [partnerData, setPartnerData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({});
@@ -31,12 +29,10 @@ const PartnerDashboardAdmin = () => {
           setPartnerData(res.data.data);
           setEditedData(res.data.data); 
           dispatch(addUser(res.data.data));
-        }
-        setLoading(false);
+        }  
       } catch (err) {
         console.error("Failed to fetch partner data:", err);
         setError("Failed to load partner data. You may not have permission.");
-        setLoading(false);
       }
     };
 
@@ -46,7 +42,7 @@ const PartnerDashboardAdmin = () => {
   }, [partnerId, dispatch]);
 
   const handleBack = () => {
-    router.push("/admin-dashboard");
+    router.push("/admin/dashboard");
   };
   const handleEdit = () => {
     setIsEditing(true);
@@ -113,7 +109,7 @@ const PartnerDashboardAdmin = () => {
               Back to Admin Dashboard
             </button>
             <h2 className="text-lg font-semibold">
-              Viewing Partner: {partnerData.name} (Admin Mode)
+              Viewing Partner: {partnerData?.name} (Admin Mode)
             </h2>
           </div>
           <button 
@@ -133,7 +129,6 @@ const PartnerDashboardAdmin = () => {
       </div>
     );
   }
-  // If editing, show the edit form
   return (
     <div className="min-h-screen p-6 bg-gray-100">
       <button 
@@ -160,8 +155,7 @@ const PartnerDashboardAdmin = () => {
               Cancel
             </button>
           </div>
-        </div>
-        
+        </div> 
         {updateMessage && (
           <div className={`p-3 mb-4 rounded ${updateMessage.includes('Failed') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
             {updateMessage}
@@ -203,8 +197,8 @@ const PartnerDashboardAdmin = () => {
           </div>   
           <div>
             <h2 className="text-lg font-semibold mb-2">Account Details (Not Editable)</h2>
-            <p><strong>Account ID:</strong> {partnerData._id}</p>
-            <p><strong>Role:</strong> {partnerData.role}</p>
+            <p><strong>Account ID:</strong> {partnerData?._id}</p>
+            <p><strong>Role:</strong> {partnerData?.role}</p>
             <p><strong>Joined:</strong> {new Date(partnerData.createdAt).toLocaleDateString()}</p>
           </div>
         </div>
