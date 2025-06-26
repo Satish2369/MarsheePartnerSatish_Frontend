@@ -29,9 +29,7 @@ const PartnerDashboardAdmin = () => {
         
         if (res.data.success) {
           setPartnerData(res.data.data);
-          setEditedData(res.data.data);
-          
-          // Set the partner data in Redux store for the Dashboard component
+          setEditedData(res.data.data); 
           dispatch(addUser(res.data.data));
         }
         setLoading(false);
@@ -76,10 +74,7 @@ const PartnerDashboardAdmin = () => {
         setPartnerData(res.data.data);
         setIsEditing(false);
         setUpdateMessage("Partner data updated successfully!");
-        
-        // Update Redux store with the updated partner data
-        dispatch(addUser(res.data.data));
-        
+        dispatch(addUser(res.data.data));  
         // Clear success message after 3 seconds
         setTimeout(() => {
           setUpdateMessage("");
@@ -139,7 +134,6 @@ const PartnerDashboardAdmin = () => {
             {updateMessage}
           </div>
         )}
-        
         {/* Render the partner's dashboard */}
         <Dashboard isAdminView={true} />
       </div>
@@ -221,14 +215,12 @@ const PartnerDashboardAdmin = () => {
             <p><strong>Account ID:</strong> {partnerData._id}</p>
             <p><strong>Role:</strong> {partnerData.role}</p>
             <p><strong>Joined:</strong> {new Date(partnerData.createdAt).toLocaleDateString()}</p>
-            <p><strong>Last Updated:</strong> {partnerData.updatedAt ? new Date(partnerData.updatedAt).toLocaleString() : 'N/A'}</p>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default PartnerDashboardAdmin;
 
 

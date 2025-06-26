@@ -43,7 +43,7 @@ const AdminDashboard = () => {
         setError("Invalid partner ID");
         return;
       }
-      // Navigate to a partner-specific dashboard view
+  
       router.push(`/admin-dashboard/partner/${partnerId}`);
     } catch (err) {
       console.error("Failed to access partner account:", err);
@@ -71,7 +71,7 @@ const AdminDashboard = () => {
         <div
           key={index}
           className="bg-white rounded-xl cursor-pointer shadow-md p-4 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
-          onClick={() => handleAccount(acc._id)} // Use _id instead of id
+          onClick={() => handleAccount(acc._id)} 
         >
           <h2 className="text-lg font-semibold text-gray-800"> partner name: {acc.name}</h2>
           <p className="text-sm text-gray-600">emailId : {acc.email}</p>
