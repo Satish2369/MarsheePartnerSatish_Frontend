@@ -12,6 +12,7 @@ const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [error,setError] = useState("");
   const router = useRouter();
+  
 
   const fetchAccounts = async () => {
     try {
@@ -28,7 +29,6 @@ const AdminDashboard = () => {
       setError(err.message);
     }
   };
-
   useEffect(() => {
     if(searchTerm.length>0){
             fetchAccounts();
@@ -52,25 +52,34 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+    <div className="min-h-screen p-6 bg-gray-100 ">
+       <div className="flex  justify-center relative">
+             <h1 className="text-2xl font-bold mb-4 text-center">Admin Dashboard</h1>
+        {account.length===0 &&( <button className="text-white absolute top-2 right-1 cursor-pointer bg-black  rounded-md px-5 py-2">create Account</button>)}
+       </div>
+     
 
+  <div className="flex justify-center mb-4">
       <input
         type="text"
         placeholder="Search accounts by name or email"
-        className="p-2 border border-gray-300 rounded w-full mb-4"
+        className=" px-4 py-2 border border-gray-300 rounded-tl-md rounded-bl-md w-[58vw] "
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      <div className="text-white bg-black px-6 py-2 cursor-pointer">Search</div>
+  </div>
+      {searchTerm.length===0 && ( <div className="text-center">No accounts found</div>)}
+    
       {error && <p className="text-red-400 texl-[30px] text-center">{error}</p>}
          
 {account && searchTerm.length>0 &&(
-  <div className="grid gap-4 mt-4">
+  <div className="grid gap-4 mt-8 w-[58vw]  ">
     {account.map((acc, index) => {
       return (
         <div
           key={index}
-          className="bg-white rounded-xl cursor-pointer shadow-md p-4 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+          className="bg-white w-full ml-[18vw]  rounded-xl cursor-pointer shadow-md p-4 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
           onClick={() => handleAccount(acc._id)} 
         >
           <h2 className="text-lg font-semibold text-gray-800"> partner name: {acc.name}</h2>

@@ -86,10 +86,6 @@ const PartnerDashboardAdmin = () => {
     }
   };
 
-  if (loading) {
-    return <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">Loading...</div>;
-  }
-
   if (error) {
     return (
       <div className="min-h-screen p-6 bg-gray-100">
@@ -103,7 +99,6 @@ const PartnerDashboardAdmin = () => {
       </div>
     );
   }
-
   // If not editing, show the partner's dashboard with an admin control panel
   if (!isEditing) {
     return (
@@ -134,12 +129,10 @@ const PartnerDashboardAdmin = () => {
             {updateMessage}
           </div>
         )}
-        {/* Render the partner's dashboard */}
         <Dashboard isAdminView={true} />
       </div>
     );
   }
-
   // If editing, show the edit form
   return (
     <div className="min-h-screen p-6 bg-gray-100">
@@ -173,8 +166,7 @@ const PartnerDashboardAdmin = () => {
           <div className={`p-3 mb-4 rounded ${updateMessage.includes('Failed') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
             {updateMessage}
           </div>
-        )}
-        
+        )} 
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
@@ -208,8 +200,7 @@ const PartnerDashboardAdmin = () => {
               <option value="Inactive">Inactive</option>
               <option value="Suspended">Suspended</option>
             </select>
-          </div>
-          
+          </div>   
           <div>
             <h2 className="text-lg font-semibold mb-2">Account Details (Not Editable)</h2>
             <p><strong>Account ID:</strong> {partnerData._id}</p>
