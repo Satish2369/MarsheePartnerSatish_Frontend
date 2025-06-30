@@ -1,13 +1,12 @@
 import AdminDashboard from "@/components/AdminDashboard"
-
-
+import AdminProtectedRoute from "@/components/AdminProtectedRoute"
 
 const page = () => {
-
   return (
-
     <div>
-      <AdminDashboard/>
+      <AdminProtectedRoute>
+        <AdminDashboard/>
+      </AdminProtectedRoute>
     </div>
   )
 }

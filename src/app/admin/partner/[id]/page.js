@@ -100,11 +100,11 @@ const PartnerDashboardAdmin = () => {
     return (
       <div className="min-h-screen bg-gray-100">
         {/* Admin Control Panel */}
-        <div className="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <div className="bg-gray-800 text-white p-2 flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <button 
               onClick={handleBack}
-              className="px-4 py-2 bg-gray-700 rounded-md hover:bg-gray-600"
+              className="px-4 py-1 bg-gray-700 rounded-md hover:bg-gray-600 cursor-pointer"
             >
               Back to Admin Dashboard
             </button>
@@ -114,7 +114,7 @@ const PartnerDashboardAdmin = () => {
           </div>
           <button 
             onClick={handleEdit}
-            className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600"
+            className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 cursor-pointer"
           >
             Edit Partner
           </button>
@@ -125,7 +125,7 @@ const PartnerDashboardAdmin = () => {
             {updateMessage}
           </div>
         )}
-        <Dashboard isAdminView={true} />
+        <Dashboard isAdminView={true}/>
       </div>
     );
   }
@@ -133,24 +133,24 @@ const PartnerDashboardAdmin = () => {
     <div className="min-h-screen p-6 bg-gray-100">
       <button 
         onClick={handleBack}
-        className="mb-4 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+        className="mb-4 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 cursor-pointer"
       >
         Back to Admin Dashboard
       </button>
       
       <div className="bg-white rounded-xl shadow-md p-6">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Edit Partner: {partnerData.name}</h1>
+          <h1 className="text-2xl font-bold">Edit Partner: {partnerData?.name}</h1>
           <div className="flex space-x-2">
             <button 
               onClick={handleSave}
-              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+              className="px-4 py-2 bg-green-500 cursor-pointer text-white rounded-md hover:bg-green-600"
             >
               Save Changes
             </button>
             <button 
               onClick={handleCancel}
-              className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+              className="px-4 py-2 bg-gray-500 cursor-pointer text-white rounded-md hover:bg-gray-600"
             >
               Cancel
             </button>

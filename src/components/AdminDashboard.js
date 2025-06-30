@@ -51,11 +51,21 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleClick = async ()=>{
+
+       router.push("/admin/create/partner")
+   
+  }
+
+
+
+
+
   return (
     <div className="min-h-screen p-6 bg-gray-100 ">
        <div className="flex  justify-center relative">
              <h1 className="text-2xl font-bold mb-4 text-center">Admin Dashboard</h1>
-        {account.length===0 &&( <button className="text-white absolute top-2 right-1 cursor-pointer bg-black  rounded-md px-5 py-2">create Account</button>)}
+        {account.length===0 &&( <button  onClick={handleClick} className="text-white absolute top-2 right-1 cursor-pointer bg-black  rounded-md px-5 py-2">create Account</button>)}
        </div>
      
 
