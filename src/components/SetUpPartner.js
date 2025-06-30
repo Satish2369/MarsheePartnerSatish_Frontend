@@ -44,7 +44,7 @@ const SetUpPartner = () => {
       const response = await axios.post(`${BASE_URL}/setup-partner`, {
         token,
         password
-      });
+      },{withCredentials:true});
       
       setSuccess(true);
       setTimeout(() => {
