@@ -62,7 +62,7 @@ const PartnerDashboardAdmin = () => {
 
   const handleSave = async () => {
     try {
-      const res = await axios.put(`${BASE_URL}/admin/partner/${partnerId}`, editedData, {
+      const res = await axios.patch(`${BASE_URL}/admin/partner/${partnerId}`, editedData, {
         withCredentials: true,
       });
       
@@ -194,12 +194,19 @@ const PartnerDashboardAdmin = () => {
               <option value="Inactive">Inactive</option>
               <option value="Suspended">Suspended</option>
             </select>
-          </div>   
+          </div>
           <div>
-            <h2 className="text-lg font-semibold mb-2">Account Details (Not Editable)</h2>
-            <p><strong>Account ID:</strong> {partnerData?._id}</p>
-            <p><strong>Role:</strong> {partnerData?.role}</p>
-            <p><strong>Joined:</strong> {new Date(partnerData.createdAt).toLocaleDateString()}</p>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+            <select
+              name="role"
+              value={editedData.role || 'partner'}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="partner">Partner</option>
+              <option value="manager">Manager</option>
+              <option value="owner">owner</option>
+            </select>
           </div>
         </div>
       </div>
@@ -207,6 +214,8 @@ const PartnerDashboardAdmin = () => {
   );
 };
 export default PartnerDashboardAdmin;
+
+
 
 
 
