@@ -128,7 +128,7 @@ const Login = () => {
     <div className="h-screen w-full bg-white text-black flex items-center justify-center relative overflow-hidden">
       <div className="px-12">
         <h2 className="text-6xl text-zinc-800 font-thin">Let&apos;s hear what</h2>
-        <h2 className="text-6xl text-zinc-800 font-thin">pet don&apos;t say</h2>
+        <h2 className="text-6xl text-zinc-800 font-thin">pets don&apos;t say</h2>
       </div>
 
       <div className="w-1/2 flex justify-center">
