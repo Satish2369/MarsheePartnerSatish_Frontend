@@ -35,7 +35,7 @@ const Signup = () => {
         window.recaptchaVerifier = null;
       }
 
-      // Wait for the DOM to update and recaptcha-container to be present
+     
       const timer = setTimeout(() => {
         const recaptchaDiv = document.getElementById("recaptcha-container");
         if (recaptchaDiv && !window.recaptchaVerifier) {
@@ -48,7 +48,7 @@ const Signup = () => {
             console.error("Recaptcha init failed:", err.message);
           }
         }
-      }, 100); // Short delay to ensure DOM is updated
+      }, 100);
 
       return () => {
         clearTimeout(timer);
@@ -78,8 +78,8 @@ const Signup = () => {
         { name: fullName, email, password },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data.data));
-      router.push("/dashboard");
+     
+      router.push("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
     } finally {
@@ -148,8 +148,8 @@ const Signup = () => {
         { withCredentials: true }
       );
 
-      dispatch(addUser(res.data.data));
-      router.push("/dashboard");
+   
+      router.push("/login");
     } catch (err) {
       setError(err.response?.data?.message || err.message || "OTP verification failed");
     } finally {

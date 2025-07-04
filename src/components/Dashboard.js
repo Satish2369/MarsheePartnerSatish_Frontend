@@ -24,7 +24,7 @@ const Dashboard = ({ isAdminView = false }) => {
 
   const handleLogOut = () => {
     try {
-      // If in admin view, don't actually log out the admin
+    
       if (isAdminView) {
         return;
       }

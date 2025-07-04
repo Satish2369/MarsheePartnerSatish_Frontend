@@ -27,7 +27,6 @@ const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  // Setup invisible reCAPTCHA on mount if tab is phone
   useEffect(() => {
     if (tab === "phone" && typeof window !== "undefined") {
       if (window.recaptchaVerifier) {

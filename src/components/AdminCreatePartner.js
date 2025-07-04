@@ -70,7 +70,7 @@ import { BASE_URL } from '@/utils/constant';
           <option value="">Select Role</option>
           <option value="manager">manager</option>
           <option value="partner">Partner</option>
-          <option value="admin">admin</option>
+          <option value="owner">owner</option>
         </select>
 
         <button

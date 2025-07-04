@@ -21,7 +21,7 @@ const AdminProtectedRoute = ({ children }) => {
         if (res.data.success) {
           setLoading(false);
         } else { 
-           // If response is successful but indicates not admin
+           
         
           router.push("/admin/login");
         }
